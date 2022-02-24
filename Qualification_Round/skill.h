@@ -6,7 +6,7 @@
 #define MAX_ROLES 1024
 
 int skill_nbr;
-int skills_name[MAX_ROLES*MAX_STR*sizeof(char)];
+char skills_name[MAX_ROLES*MAX_STR*sizeof(char)];
 
 void skill_init();
 
