@@ -15,7 +15,7 @@ void project_read_data(){
 
     project_tab = malloc(project_tab_size*sizeof(struct project));
 
-    for(int i = 0; i< project_tab_size-1; i++){
+    for(int i = 0; i< project_tab_size; i++){
         
         next_word(str);
         strcpy(project_tab[i].name,str);
@@ -33,7 +33,8 @@ void project_read_data(){
         project_tab[i].roles_nbr = atoi(str);
 
         project_tab[i].roles_id = malloc(project_tab[i].roles_nbr*sizeof(int));
-        for(int j = 0; j< project_tab[i].roles_nbr-1;j++){
+        project_tab[i].roles_level = malloc(project_tab[i].roles_nbr*sizeof(int));
+        for(int j = 0; j< project_tab[i].roles_nbr;j++){
             next_word(str);
             project_tab[i].roles_id[j] = skill_get_id_otherwise_add(str);
             next_word(str);
