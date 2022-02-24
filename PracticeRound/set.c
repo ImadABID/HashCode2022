@@ -166,7 +166,7 @@ char set_extand(struct set *set, struct set *set_next){
 
     set->freez = 1;
     
-    score = ingredient_set_score(new_entry->ingredients, new_entry->ingredients_nbr);
+    score = ingredient_set_score(set->ingredients, set->ingredients_nbr);
     if(score > max_score){
         max_score = score;
         ingredients_opt_len = set->ingredients_nbr;
