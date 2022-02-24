@@ -11,6 +11,8 @@ struct contributor
     int* skills_level;
 };
 
+//read data
+void contributor_read_data();
 
 int contributor_tab_size;
 struct contributor* contributor_tab;

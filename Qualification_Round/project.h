@@ -14,6 +14,14 @@ struct project{
     int *roles_level;
 };
 
+//read data
+void project_read_data();
 
+//store by best befor
+void project_store_by_bestbefore(struct  project* project_tab);
+
+
+int project_tab_size;
+struct  project* project_tab;
 
 #endif
