@@ -10,7 +10,7 @@ skill.o : skill.c skill.h
 	gcc -g -Wall -c skill.c
 
 clean :
-	rm -rf *.o src.zip
+	rm -rf *.o src.zip main
 
 zip :
 	zip src.zip *.c *.h Makefile
