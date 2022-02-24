@@ -94,4 +94,5 @@ int skill_masters_get(int skill_id, int skill_level, int t){
             return index;
         }
         else{return -1;}
+    }
 }

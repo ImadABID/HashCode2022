@@ -40,6 +40,8 @@ void project_read_data(){
             next_word(str);
             project_tab[i].roles_level[j] = atoi(str);
         }
+
+        project_tab[i].affected = 0;
     }
 
 }
