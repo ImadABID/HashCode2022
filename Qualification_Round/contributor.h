@@ -9,11 +9,16 @@ struct contributor
     int skills_nbre;
     int* skills_id;
     int* skills_level;
-};
 
-//read data
-void contributor_read_data();
+    int available_after;
+
+};
 
 int contributor_tab_size;
 struct contributor* contributor_tab;
+
+//read data
+void contributor_read_data();
+char contributor_is_available(int contributor_id, int t);
+
 #endif

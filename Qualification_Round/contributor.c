@@ -24,6 +24,7 @@ void contributor_read_data(){
         contributor_tab[i].skills_nbre = atoi(str);
         contributor_tab[i].skills_id = malloc(contributor_tab[i].skills_nbre*sizeof(int));
         contributor_tab[i].skills_level = malloc(contributor_tab[i].skills_nbre*sizeof(int));
+        contributor_tab[i].available_after = 0;
 
         for(int j = 0; j< contributor_tab[i].skills_nbre;j++){
             next_word(str);
@@ -33,4 +34,8 @@ void contributor_read_data(){
         }
     }
 
+}
+
+char contributor_is_available(int contributor_id, int t){
+    return t>=contributor_tab[contributor_id].available_after;
 }

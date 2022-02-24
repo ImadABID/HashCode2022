@@ -24,4 +24,6 @@ void skill_masters_populate();
 void skill_masters_store_by_level(int skill_id, int *masters_ids, int masters_ids_size);
 void skill_masters_reindexetion();
 
+int skill_masters_get(int skill_id, int skill_level, int t);
+
 #endif

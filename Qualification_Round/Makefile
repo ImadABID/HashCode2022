@@ -1,7 +1,7 @@
 all : main
 
-main : main.c common.o skill.o contributor.o project.o
-	gcc -g -Wall -o main main.c common.o skill.o contributor.o project.o
+main : main.c common.o skill.o contributor.o project.o affectation.o
+	gcc -g -Wall -o main main.c common.o skill.o contributor.o project.o affectation.o
 
 common.o : common.c common.h
 	gcc -g -Wall -c common.c
@@ -15,6 +15,8 @@ project.o : project.c project.h
 contributor.o : contributor.c contributor.h
 	gcc -g -Wall -c contributor.c
 
+affectation.o : affectation.c affectation.h
+	gcc -g -Wall -c affectation.c
 
 clean :
 	rm -rf *.o src.zip main
