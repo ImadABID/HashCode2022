@@ -4,7 +4,7 @@
 #include <unistd.h>
 
 #include "common.h"
-
+#include "contributor.h"
 
 
 //sig_handler
@@ -22,6 +22,12 @@ void print_tmp_data(int signum){
 
 int main(){
 
+    char* str[MAX_STR];
+    next_word(str);
+    contributor_tab_size = atoi(str);
+
+    next_word(str);
+    project_tab_size = atoi(str);
 
     //sig_handler
     signal(SIGINT, print_tmp_data); // Register signal handler
