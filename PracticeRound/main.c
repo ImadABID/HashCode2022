@@ -22,6 +22,16 @@ void print_tmp_data(int signum){
 int main(){
 
     clients_init_and_read_data();
+    clients_shrink_data();
+
+    printf("ingredient_nbr = %d\n", ingredient_nbr);
+    //for(int i < ingredient_nbr; )
+
+    /*
+    for(int i = 0; i < clients_nbr; i++){
+        printf("%d\n", clients[i].conflcts_nbr);
+    }
+    */
 
     set_init();
 
