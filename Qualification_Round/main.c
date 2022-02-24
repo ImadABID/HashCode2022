@@ -7,6 +7,11 @@
 #include "contributor.h"
 #include "project.h"
 
+#include "affectation.h"
+
+#define T_MAX 100
+
+
 //sig_handler
 void print_tmp_data(int signum){
     /*
@@ -60,9 +65,16 @@ int main(){
     }
 
 
+    affectations_init();
+
     //sig_handler
     signal(SIGINT, print_tmp_data); // Register signal handler
+    
+    for(int t = 0; t<T_MAX; t++){
+        affectations_update(t);
+    }
 
+    // out
     
 
     return 0;

@@ -12,6 +12,9 @@ struct project{
     int roles_nbr;
     int *roles_id;
     int *roles_level;
+
+    char affected;
+
 };
 
 //read data

@@ -19,6 +19,6 @@ int affectations_size ;
 struct affectation *affectations;
 
 void affectations_init();
-
+void affectations_update(int t);
 
 #endif
