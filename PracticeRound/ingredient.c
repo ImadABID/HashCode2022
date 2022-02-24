@@ -77,6 +77,7 @@ char ingredient_name_in_ingredient_id_list(char *ingredient_str, int *ingredient
     return 0;
 }
 
+/*
 void ingredient_likes_hates(int *likes_nbr, int *hates_nbr, int ingredient_id){
     
     *likes_nbr = 0;
@@ -94,6 +95,26 @@ void ingredient_likes_hates(int *likes_nbr, int *hates_nbr, int ingredient_id){
 
         if(client_hates_ingredient(client, ingredient_id)){
             (*hates_nbr)++;
+        }
+
+    }
+}
+*/
+
+void ingredient_likes_hates(int *likes_nbr, int *hates_nbr, int ingredient_id){
+    
+    *likes_nbr = 0;
+    *hates_nbr = 0;
+
+    struct client client;
+    for(int client_i = 0; client_i < clients_nbr; client_i++){
+        
+        client = clients[client_i];
+
+        if(client_hates_ingredient(client, ingredient_id)){
+            (*hates_nbr)++;
+        }else{
+            (*likes_nbr)++;
         }
 
     }

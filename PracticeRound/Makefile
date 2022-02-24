@@ -1,5 +1,8 @@
 all : main
 
+compute_score : compute_score.c client.o ingredient.o common.o set.o
+	gcc -g -Wall -o compute_score compute_score.c client.o ingredient.o common.o set.o
+
 main : main.c client.o ingredient.o common.o set.o
 	gcc -g -Wall -o main main.c client.o ingredient.o common.o set.o
 

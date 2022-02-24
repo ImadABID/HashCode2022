@@ -83,7 +83,7 @@ void clients_shrink_data(){
     struct client *clients_new;
 
     if(clients_nbr > 100){
-        clients_nbr_shrinked = (int)(0.002* clients_nbr);
+        clients_nbr_shrinked = (int)(0.5* clients_nbr);
     }else{
         clients_nbr_shrinked = clients_nbr;
     }
