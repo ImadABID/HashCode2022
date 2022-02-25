@@ -39,3 +39,17 @@ void contributor_read_data(){
 char contributor_is_available(int contributor_id, int t){
     return t>=contributor_tab[contributor_id].available_after;
 }
+
+int contributor_get_skill_level(int contributor_id, int skill_id){
+
+    struct contributor contr = contributor_tab[contributor_id];
+
+    for(int i = 0; i < contr.skills_nbre; i++){
+        if(contr.skills_id[i] == skill_id){
+            return contr.skills_level[i];
+        }
+    }
+
+    return 0;
+
+}

@@ -86,13 +86,13 @@ void skill_masters_reindexetion(){
 }
 
 int skill_masters_get(int skill_id, int skill_level, int t){
-    // pppp
-    int index;
+    int contr_id;
     for(int i = 0; i<skill_masters_indexes[skill_id]; i++){
-        index=skill_masters[skill_id][i];
-        if((contributor_is_available(index,t)!=0) && (skill_level>index)){
-            return index;
+        contr_id=skill_masters[skill_id][i];
+        if(contributor_get_skill_level(contr_id, skill_id) >= skill_level && contributor_is_available(contr_id,t)){
+            return contr_id;
         }
-        else{return -1;}
     }
+
+    return -1;
 }
