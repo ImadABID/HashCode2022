@@ -2,7 +2,7 @@
 #include "common.h"
 #include "contributor.h"
 
-#define MAX_SKILL_MASTERS 1024
+#define MAX_SKILL_MASTERS 10000
 
 void skill_init(){
     skill_nbr = 0;
@@ -85,11 +85,24 @@ void skill_masters_reindexetion(){
     }
 }
 
-int skill_masters_get(int skill_id, int skill_level, int t){
+char contributor_in_list(int contibutor_id, int *contibutor_ids, int contibutor_ids_size){
+    for(int i = 0; i<contibutor_ids_size; i++){
+        if(contibutor_id == contibutor_ids[i]){
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int skill_masters_get(int skill_id, int skill_level, int *contibutor_id_not_int, int contibutor_id_not_int_size, int t){
     int contr_id;
     for(int i = 0; i<skill_masters_indexes[skill_id]; i++){
         contr_id=skill_masters[skill_id][i];
-        if(contributor_get_skill_level(contr_id, skill_id) >= skill_level && contributor_is_available(contr_id,t)){
+        if(
+            contributor_get_skill_level(contr_id, skill_id) >= skill_level &&
+            contributor_is_available(contr_id,t) &&
+            !contributor_in_list(contr_id, contibutor_id_not_int, contibutor_id_not_int_size)
+        ){
             return contr_id;
         }
     }

@@ -27,7 +27,11 @@ void submition_file(){
 void affectations_update(int t){
 
     int contributor_id;
+
+    struct affectation *affectation;
+
     int start_time = 0;
+    int end_time;
 
     char affected;
 
@@ -37,17 +41,19 @@ void affectations_update(int t){
 
         affected = 1;
 
-        affectations[affectations_size].project_id = i;
-        affectations[affectations_size].contributor_ids_size = project_tab[i].roles_nbr;
-        affectations[affectations_size].contributor_ids = malloc(affectations[affectations_size].contributor_ids_size * sizeof(int));
+        affectation = &(affectations[affectations_size]);
+
+        (*affectation).project_id = i;
+        (*affectation).contributor_ids_size = project_tab[i].roles_nbr;
+        (*affectation).contributor_ids = malloc((*affectation).contributor_ids_size * sizeof(int));
         for(int role_i = 0; role_i < project_tab[i].roles_nbr; role_i++){
-            contributor_id = skill_masters_get(project_tab[i].roles_id[role_i], project_tab[i].roles_level[role_i], t);
+            contributor_id = skill_masters_get(project_tab[i].roles_id[role_i], project_tab[i].roles_level[role_i], (*affectation).contributor_ids, role_i, t);
             if(contributor_id == -1){
-                free(affectations[affectations_size].contributor_ids);
+                free((*affectation).contributor_ids);
                 affected = 0;
                 break;
             }
-            affectations[affectations_size].contributor_ids[role_i] = contributor_id;
+            (*affectation).contributor_ids[role_i] = contributor_id;
             if(contributor_tab[contributor_id].available_after > start_time){
                 start_time = contributor_tab[contributor_id].available_after;
             }
@@ -57,10 +63,10 @@ void affectations_update(int t){
 
         project_tab[i].affected = 1;
 
-        affectations[affectations_size].start_time = start_time;
+        end_time = start_time + project_tab[(*affectation).project_id].duration;
 
-        for(int j = 0; j < affectations[affectations_size].contributor_ids_size; j++){
-            contributor_tab[affectations[affectations_size].contributor_ids[j]].available_after = affectations[affectations_size].start_time + project_tab[affectations[affectations_size].project_id].duration;
+        for(int j = 0; j < (*affectation).contributor_ids_size; j++){
+            contributor_tab[(*affectation).contributor_ids[j]].available_after = end_time;
         }
 
         affectations_size++;

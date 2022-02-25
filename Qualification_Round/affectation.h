@@ -11,8 +11,6 @@ struct affectation{
 
     int contributor_ids_size; // project nbr_roles
     int *contributor_ids;
-
-    int start_time;
 };
 
 int affectations_size ;

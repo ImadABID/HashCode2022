@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_STR 24
+#define MAX_STR 128
 
 void next_word(char *word);
 

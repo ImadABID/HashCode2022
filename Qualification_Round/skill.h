@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-#define MAX_ROLES 1024
+#define MAX_ROLES 10000
 
 int skill_nbr;
 char skills_name[MAX_ROLES*MAX_STR*sizeof(char)];
@@ -24,6 +24,6 @@ void skill_masters_populate();
 void skill_masters_store_by_level(int skill_id, int *masters_ids, int masters_ids_size);
 void skill_masters_reindexetion();
 
-int skill_masters_get(int skill_id, int skill_level, int t);
+int skill_masters_get(int skill_id, int skill_level, int *contibutor_id_not_int, int contibutor_id_not_int_size, int t);
 
 #endif
