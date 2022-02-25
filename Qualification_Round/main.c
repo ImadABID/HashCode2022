@@ -35,12 +35,24 @@ int main(){
         next_word(str);
         project_tab_size = atoi(str);
 
+        skill_init();
+
         contributor_read_data();
         project_read_data();
     //----------------------------------------------------------------
 
- 
-    skill_init();
+    // fprintf(stderr, "skill_nbr=%d\n", skill_nbr);
+    // for(int i = 0; i < skill_nbr; i++){
+    //     printf("%s\n",skill_get_name_by_id(i));
+    // }
+    // fprintf(stderr, "------------------------\n");
+
+    skill_masters_init();
+
+    //fprintf(stderr, "skill %d masters nbr=%d\n", 0, skill_masters_indexes[0]);
+
+    skill_masters_populate();
+    skill_masters_reindexetion();
 
     affectations_init();
 
@@ -53,6 +65,8 @@ int main(){
 
     // out
     submition_file();
+
+    skill_masters_free();
 
     return 0;
 }

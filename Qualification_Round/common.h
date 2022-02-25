@@ -5,8 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_STR 16
-#define MAX_INGR_IN_PIZZA 50
+#define MAX_STR 24
 
 void next_word(char *word);
 

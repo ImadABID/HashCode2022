@@ -29,9 +29,13 @@ void affectations_update(int t){
     int contributor_id;
     int start_time = 0;
 
+    char affected;
+
     for(int i=0; i < project_tab_size; i++){
 
         if(project_tab[i].affected) continue;
+
+        affected = 1;
 
         affectations[i].project_id = i;
         affectations[i].contributor_ids_size = project_tab[i].roles_nbr;
@@ -40,7 +44,8 @@ void affectations_update(int t){
             contributor_id = skill_masters_get(project_tab[i].roles_id[role_i], project_tab[i].roles_level[role_i], t);
             if(contributor_id == -1){
                 free(affectations[i].contributor_ids);
-                continue;
+                affected = 0;
+                break;
             }
             affectations[i].contributor_ids[role_i] = contributor_id;
             if(contributor_tab[contributor_id].available_after > start_time){
@@ -48,10 +53,12 @@ void affectations_update(int t){
             }
         }
 
+        if(!affected) continue;
+
         affectations[i].start_time = start_time;
 
-        for(int i = 0; i < affectations[i].contributor_ids_size; i++){
-            contributor_tab[affectations[i].contributor_ids[i]].available_after = affectations[i].start_time + project_tab[affectations[i].project_id].duration;
+        for(int j = 0; j < affectations[i].contributor_ids_size; j++){
+            contributor_tab[affectations[i].contributor_ids[j]].available_after = affectations[i].start_time + project_tab[affectations[i].project_id].duration;
         }
 
     }

@@ -1,9 +1,8 @@
-
 #include "skill.h"
 #include "common.h"
 #include "contributor.h"
 
-#define MAX_SKILL_MASTERS 100
+#define MAX_SKILL_MASTERS 1024
 
 void skill_init(){
     skill_nbr = 0;
@@ -30,7 +29,7 @@ int skill_get_id_otherwise_add(char *skill_str){
 
 void skill_masters_init(){
     skill_masters = malloc(skill_nbr * sizeof(int *));
-    skill_masters_indexes = malloc(skill_nbr * sizeof(int *));
+    skill_masters_indexes = malloc(skill_nbr * sizeof(int));
     for(int i = 0; i<skill_nbr; i++){
         skill_masters[i] = malloc(MAX_SKILL_MASTERS * sizeof(int));
         skill_masters_indexes[i] = 0;
@@ -53,7 +52,8 @@ void skill_masters_populate(){
     for(int contributor_i = 0; contributor_i<contributor_tab_size; contributor_i++){
         for(int skill_i = 0; skill_i<contributor_tab[contributor_i].skills_nbre; skill_i++){
             skill_tab_index = contributor_tab[contributor_i].skills_id[skill_i];
-            skill_masters[skill_tab_index][skill_masters_indexes[skill_tab_index]++] = contributor_i;
+            skill_masters[skill_tab_index][skill_masters_indexes[skill_tab_index]] = contributor_i;
+            skill_masters_indexes[skill_tab_index]++;
         }
     }
 }
