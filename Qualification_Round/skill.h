@@ -26,4 +26,6 @@ void skill_masters_reindexetion();
 
 int skill_masters_get(int skill_id, int skill_level, int *contibutor_id_not_int, int contibutor_id_not_int_size, int t);
 
+void skill_masters_update_rank();
+
 #endif

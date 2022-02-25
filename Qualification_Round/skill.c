@@ -3,9 +3,16 @@
 #include "contributor.h"
 
 #define MAX_SKILL_MASTERS 10000
+#define MAX_SKILL_TO_UPDATE_QIUE 100
+
+int skill_masters_last_proposed_index;
+int skill_masters_last_proposed_skill_ids[MAX_SKILL_TO_UPDATE_QIUE];
+int skill_masters_last_proposed_indexs[MAX_SKILL_TO_UPDATE_QIUE];
 
 void skill_init(){
     skill_nbr = 0;
+
+    skill_masters_last_proposed_index = 0;
 }
 
 char *skill_get_name_by_id(int id){
@@ -103,9 +110,41 @@ int skill_masters_get(int skill_id, int skill_level, int *contibutor_id_not_int,
             contributor_is_available(contr_id,t) &&
             !contributor_in_list(contr_id, contibutor_id_not_int, contibutor_id_not_int_size)
         ){
+            if(skill_masters_last_proposed_index < MAX_SKILL_TO_UPDATE_QIUE){
+                skill_masters_last_proposed_skill_ids[skill_masters_last_proposed_index] = skill_id;
+                skill_masters_last_proposed_indexs[skill_masters_last_proposed_index] = contr_id;
+                skill_masters_last_proposed_index++;
+            }
+
             return contr_id;
         }
     }
 
     return -1;
+}
+
+void skill_masters_update_rank_for_one(int skill_id, int constri_rank){
+    int tmp;
+    int contr_level;
+    int next_contr_level;
+    if(constri_rank < skill_masters_indexes[skill_id]-1){
+        contr_level = contributor_get_skill_level(skill_masters[skill_id][constri_rank], skill_id);
+        next_contr_level = contributor_get_skill_level(skill_masters[skill_id][constri_rank+1], skill_id);
+        if(contr_level > next_contr_level){
+            tmp = skill_masters[skill_id][constri_rank];
+            skill_masters[skill_id][constri_rank]
+                = skill_masters[skill_id][constri_rank+1];
+            skill_masters[skill_id][constri_rank+1] = tmp;
+        }
+    }
+}
+
+void skill_masters_update_rank(){
+    for(int i = 0; i<skill_masters_last_proposed_index; i++){
+        skill_masters_update_rank_for_one(
+            skill_masters_last_proposed_skill_ids[i],
+            skill_masters_last_proposed_indexs[i]
+        );
+    }
+    skill_masters_last_proposed_index = 0;
 }

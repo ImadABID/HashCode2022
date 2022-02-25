@@ -84,6 +84,8 @@ void affectations_update(int t){
             }
         }
 
+        skill_masters_update_rank();
+
         affectations_size++;
         project_tab_not_handled_yet_nbr--;
 
