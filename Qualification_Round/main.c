@@ -9,8 +9,6 @@
 
 #include "affectation.h"
 
-#define T_MAX 100
-
 
 //sig_handler
 void print_tmp_data(int signum){
@@ -59,8 +57,9 @@ int main(){
     //sig_handler
     signal(SIGINT, print_tmp_data); // Register signal handler
     
-    for(int t = 0; t<T_MAX; t++){
-        affectations_update(t);
+    int t = 0;
+    while(project_tab_not_handled_yet_nbr>0){
+        affectations_update(t++);
     }
 
     // out

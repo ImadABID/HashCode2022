@@ -42,7 +42,10 @@ void project_read_data(){
         }
 
         project_tab[i].affected = 0;
+        project_tab[i].skipped = 0;
     }
+
+    project_tab_not_handled_yet_nbr = project_tab_size;
 
 }
 
@@ -62,4 +65,8 @@ void project_store_by_bestbefore(struct  project* project_tab){
         }
         not_storted_yet_nbr--;
     }
+}
+
+char project_start_time_has_past(int project_id, int t){
+    return project_tab[project_id].best_befor-project_tab[project_id].duration < t;
 }

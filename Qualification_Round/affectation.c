@@ -37,7 +37,12 @@ void affectations_update(int t){
 
     for(int i=0; i < project_tab_size; i++){
 
-        if(project_tab[i].affected) continue;
+        if(project_tab[i].affected || project_tab[i].skipped) continue;
+
+        if(project_start_time_has_past(i, t)){
+            project_tab[i].skipped = 1;
+            project_tab_not_handled_yet_nbr--;
+        }
 
         affected = 1;
 
@@ -70,6 +75,7 @@ void affectations_update(int t){
         }
 
         affectations_size++;
+        project_tab_not_handled_yet_nbr--;
 
     }
 }
