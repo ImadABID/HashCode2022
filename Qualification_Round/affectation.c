@@ -33,6 +33,8 @@ void affectations_update(int t){
     int start_time = 0;
     int end_time;
 
+    int *skill_level;
+
     char affected;
 
     for(int i=0; i < project_tab_size; i++){
@@ -72,6 +74,14 @@ void affectations_update(int t){
 
         for(int j = 0; j < (*affectation).contributor_ids_size; j++){
             contributor_tab[(*affectation).contributor_ids[j]].available_after = end_time;
+
+            skill_level = contributor_get_skill_level_ptr((*affectation).contributor_ids[j], project_tab[i].roles_id[j]);
+            if(
+                *skill_level == project_tab[i].roles_level[j] ||
+                *skill_level == project_tab[i].roles_level[j] - 1
+            ){
+                (*skill_level)++;
+            }
         }
 
         affectations_size++;

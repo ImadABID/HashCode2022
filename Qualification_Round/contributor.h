@@ -22,5 +22,6 @@ void contributor_read_data();
 
 char contributor_is_available(int contributor_id, int t);
 int contributor_get_skill_level(int contributor_id, int skill_id);
+int *contributor_get_skill_level_ptr(int contributor_id, int skill_id);
 
 #endif
