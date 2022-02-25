@@ -32,8 +32,50 @@ void contributor_read_data(){
             next_word(str);
             contributor_tab[i].skills_level[j] = atoi(str);
         }
+
+        contributor_deny_little_skills(&(contributor_tab[i]));
+    
     }
 
+}
+
+void contributor_deny_little_skills(struct contributor *contributor){
+    
+    // finding max
+    int max_skill_level = 0;
+    for(int i = 0; i<contributor->skills_nbre; i++){
+        if(contributor->skills_level[i] > max_skill_level){
+            max_skill_level = contributor->skills_level[i];
+        }
+    }
+
+    // computing
+    int skills_nbre = 0;
+    for(int i = 0; i<contributor->skills_nbre; i++){
+        if(max_skill_level - contributor->skills_level[i] < SKILL_GAP){
+            skills_nbre++;
+        }
+    }
+
+    // eliminate
+    int *skills_id = malloc(skills_nbre*sizeof(int));
+    int *skills_level = malloc(skills_nbre*sizeof(int));
+
+    int j = 0; 
+    for(int i = 0; i< contributor->skills_nbre; i++){
+        if(max_skill_level - contributor->skills_level[i] < SKILL_GAP){
+            skills_id[j] = contributor->skills_id[i];
+            skills_level[j] = contributor->skills_level[i];
+            j++;
+        }
+    }
+
+    free(contributor->skills_id);
+    free(contributor->skills_level);
+
+    contributor->skills_id = skills_id;
+    contributor->skills_level = skills_level;
+    contributor->skills_nbre = skills_nbre;
 }
 
 char contributor_is_available(int contributor_id, int t){

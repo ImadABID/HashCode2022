@@ -2,6 +2,7 @@
 #define __CONTRIBUTOR_H__
 #include "common.h"
 
+#define SKILL_GAP 4
 
 struct contributor
 {
@@ -25,5 +26,7 @@ int contributor_get_skill_level(int contributor_id, int skill_id);
 int *contributor_get_skill_level_ptr(int contributor_id, int skill_id);
 
 int contributor_find_the_best_level_at(int *contributor_ids, int contributor_ids_size, int skill_id);
+
+void contributor_deny_little_skills(struct contributor *contributor);
 
 #endif
