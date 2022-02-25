@@ -67,3 +67,17 @@ int *contributor_get_skill_level_ptr(int contributor_id, int skill_id){
     return NULL;
 
 }
+
+int contributor_find_the_best_level_at(int *contributor_ids, int contributor_ids_size, int skill_id){
+    int max_level = -1;
+    int level;
+
+    for(int i = 0; i < contributor_ids_size; i++){
+        level = contributor_get_skill_level(contributor_ids[i], skill_id);
+        if(level > max_level){
+            max_level = level;
+        }
+    }
+
+    return max_level;
+}

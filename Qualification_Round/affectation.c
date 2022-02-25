@@ -35,6 +35,8 @@ void affectations_update(int t){
 
     int *skill_level;
 
+    int req_level;
+
     char affected;
 
     for(int i=0; i < project_tab_size; i++){
@@ -54,7 +56,19 @@ void affectations_update(int t){
         (*affectation).contributor_ids_size = project_tab[i].roles_nbr;
         (*affectation).contributor_ids = malloc((*affectation).contributor_ids_size * sizeof(int));
         for(int role_i = 0; role_i < project_tab[i].roles_nbr; role_i++){
-            contributor_id = skill_masters_get(project_tab[i].roles_id[role_i], project_tab[i].roles_level[role_i], (*affectation).contributor_ids, role_i, t);
+            
+            req_level = contributor_find_the_best_level_at((*affectation).contributor_ids, role_i, project_tab[i].roles_id[role_i]);
+            if(req_level >=  project_tab[i].roles_level[role_i]){
+                req_level = project_tab[i].roles_level[role_i]-1;
+            }else{
+                req_level = project_tab[i].roles_level[role_i];
+            }
+
+            if(req_level == 0){
+                req_level = 1;
+            }
+            
+            contributor_id = skill_masters_get(project_tab[i].roles_id[role_i], req_level, (*affectation).contributor_ids, role_i, t);
             if(contributor_id == -1){
                 free((*affectation).contributor_ids);
                 affected = 0;

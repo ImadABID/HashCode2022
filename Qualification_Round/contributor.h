@@ -24,4 +24,6 @@ char contributor_is_available(int contributor_id, int t);
 int contributor_get_skill_level(int contributor_id, int skill_id);
 int *contributor_get_skill_level_ptr(int contributor_id, int skill_id);
 
+int contributor_find_the_best_level_at(int *contributor_ids, int contributor_ids_size, int skill_id);
+
 #endif
